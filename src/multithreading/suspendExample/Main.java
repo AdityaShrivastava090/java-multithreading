@@ -1,4 +1,4 @@
-package multithreading.suspendexample;
+package multithreading.suspendExample;
 
 public class Main {
 

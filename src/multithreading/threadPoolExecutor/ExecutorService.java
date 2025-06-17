@@ -1,4 +1,4 @@
-package multithreading.ThreadPoolExecutor;
+package multithreading.threadPoolExecutor;
 
 import java.util.concurrent.*;
 
