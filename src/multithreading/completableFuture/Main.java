@@ -45,7 +45,7 @@ public class Main {
             CompletableFuture<String> asyncTask2 = CompletableFuture.supplyAsync(() -> {
                         System.out.println("Thread name in supplyAsync: " + Thread.currentThread().getName());
                         return "Hello ";
-                    })
+                    }, poolExecutor)
                     .thenCompose(val -> CompletableFuture.supplyAsync(() -> {
                         System.out.println("Thread name in thenCompose 1: " + Thread.currentThread().getName());
                         return val + " Aditya ";
@@ -53,7 +53,7 @@ public class Main {
                     .thenCompose(val -> CompletableFuture.supplyAsync(() -> {
                         System.out.println("Thread name in thenCompose 2: " + Thread.currentThread().getName());
                         return val + " Shrivastava ";
-                    }))
+                    },poolExecutor))
                     .thenComposeAsync(val -> CompletableFuture.supplyAsync(() -> {
                         System.out.println("Thread name in thenComposeAsync 3: " + Thread.currentThread().getName());
                         return val + " How are you ";

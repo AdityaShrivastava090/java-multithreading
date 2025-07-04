@@ -15,8 +15,9 @@ public class Main {
          */
         Future<?> futureObj = poolExecutor.submit(() -> {
             try {
+                System.out.println("task is started....." + System.currentTimeMillis());
                 Thread.sleep(7000);
-                System.out.println("task is completed.....");
+                System.out.println("task is completed....." + System.currentTimeMillis());
             } catch (Exception e) {
                 //
             }
@@ -24,6 +25,7 @@ public class Main {
         System.out.println("Is task completed " + futureObj.isDone());
 
         try {
+            System.out.println("checking if execution is done or not completely..... "+ System.currentTimeMillis());
             futureObj.get(2, TimeUnit.SECONDS);
         } catch (TimeoutException e) {
             System.out.println("Timeout exception....");
@@ -41,13 +43,14 @@ public class Main {
         System.out.println("is cancelled : " + futureObj.isCancelled());
 
 
-        List<Integer> output = new ArrayList<>();
+
 
         /**
          *  2nd UseCase - submit(Runnable runnable, T object)
          */
-        Future<List<Integer>> futureObject = poolExecutor.submit(new MyRunnable(output), output);
 
+        List<Integer> output = new ArrayList<>();
+        Future<List<Integer>> futureObject = poolExecutor.submit(new MyRunnable(output), output);
         try {
             futureObject.get();
             // 1st way
