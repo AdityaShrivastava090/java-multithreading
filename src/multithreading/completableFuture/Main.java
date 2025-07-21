@@ -1,5 +1,6 @@
 package multithreading.completableFuture;
 
+import java.sql.SQLOutput;
 import java.util.concurrent.*;
 
 public class Main {
@@ -53,7 +54,7 @@ public class Main {
                     .thenCompose(val -> CompletableFuture.supplyAsync(() -> {
                         System.out.println("Thread name in thenCompose 2: " + Thread.currentThread().getName());
                         return val + " Shrivastava ";
-                    },poolExecutor))
+                    }, poolExecutor))
                     .thenComposeAsync(val -> CompletableFuture.supplyAsync(() -> {
                         System.out.println("Thread name in thenComposeAsync 3: " + Thread.currentThread().getName());
                         return val + " How are you ";
@@ -97,6 +98,25 @@ public class Main {
                 System.out.println(val + " -> this part of string is added via thenAccept()");
             }, poolExecutor);
             System.out.println("thenCompose future object: " + asyncTask6.get());
+
+
+            ThreadPoolExecutor customPool = new ThreadPoolExecutor(
+                    2, 2, 2, TimeUnit.SECONDS, new ArrayBlockingQueue<>(5),
+                    Executors.defaultThreadFactory(), new ThreadPoolExecutor.AbortPolicy()
+            );
+
+            CompletableFuture<String> newObject = CompletableFuture.supplyAsync(
+                            () -> {
+                                return "hey there are you again " + Thread.currentThread().getName();
+                            }, customPool
+                    )
+                    .thenApplyAsync(
+                            (String val) -> {
+                                return val + "  hey today is saturday " + Thread.currentThread().getName();
+                            }, customPool
+                    );
+
+            System.out.println(newObject.get());
 
 
         } catch (Exception e) {
