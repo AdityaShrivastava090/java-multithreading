@@ -12,8 +12,6 @@ public class MyRunnable implements Runnable {
 
     @Override
     public void run() {
-
-        list.add(100);
-
+        list.add(100+400);
     }
 }

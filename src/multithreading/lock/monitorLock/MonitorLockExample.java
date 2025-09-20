@@ -1,4 +1,4 @@
-package multithreading.monitorLock;
+package multithreading.lock.monitorLock;
 
 public class MonitorLockExample {
 

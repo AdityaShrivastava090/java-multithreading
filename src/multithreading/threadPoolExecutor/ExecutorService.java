@@ -6,18 +6,23 @@ public class ExecutorService {
 
     public static void main(String[] args) {
 
-        ThreadPoolExecutor threadPoolExecutor = new ThreadPoolExecutor(2,4,5,TimeUnit.MINUTES,
-                new ArrayBlockingQueue<>(2),new customRejectHandler()
+        ThreadPoolExecutor threadPoolExecutor = new ThreadPoolExecutor(
+                2,
+                4,
+                5,
+                TimeUnit.MINUTES,
+                new ArrayBlockingQueue<>(2),
+                new customRejectHandler()
         );
 
-        for(int i = 0; i<9; i++){
-            threadPoolExecutor.submit(() ->{
-                try{
+        for (int i = 0; i < 9; i++) {
+            threadPoolExecutor.submit(() -> {
+                try {
                     Thread.sleep(5000);
-                }catch (Exception e){
+                } catch (Exception e) {
                     //
                 }
-                System.out.println("Task processed by :  "+ Thread.currentThread().getName());
+                System.out.println("Task processed by :  " + Thread.currentThread().getName());
             });
 //            threadPoolExecutor.shutdown();
         }
